@@ -11,7 +11,10 @@ const NativeStack = createNativeStackNavigator<RootNavigationParamList>();
 const Navigation: FC = () => {
   return (
     <StoreProvider store={store}>
-      <NativeStack.Navigator>
+      <NativeStack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}>
         <NativeStack.Screen component={Home} name={RootScreenName.HOME} />
       </NativeStack.Navigator>
     </StoreProvider>

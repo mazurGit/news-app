@@ -1,10 +1,13 @@
 import React, {FC} from 'react';
-import {Text, ScreenWrapper} from '~/components/components';
+import {View, ScreenWrapper} from '~/components/components';
+import {Article} from './components/components';
 
 const Home: FC = () => {
   return (
     <ScreenWrapper>
-      <Text>Home screen</Text>
+      <View>
+        <Article />
+      </View>
     </ScreenWrapper>
   );
 };
