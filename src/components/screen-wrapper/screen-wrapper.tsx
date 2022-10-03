@@ -4,9 +4,9 @@ import {colors} from '~/common/constants/constants';
 import {StatusBar, SafeAreaView} from '../components';
 import {styles} from './styles';
 
-const ScreenWrapper: FC<NativeSafeAreaViewProps> = ({children}) => {
+const ScreenWrapper: FC<NativeSafeAreaViewProps> = ({children, style}) => {
   return (
-    <SafeAreaView style={styles.wrapper}>
+    <SafeAreaView style={[styles.wrapper, style]}>
       <StatusBar
         backgroundColor={colors.gray}
         translucent={false}
