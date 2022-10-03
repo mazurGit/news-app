@@ -1,0 +1,1 @@
+export {RootScreenName} from './navigation';
