@@ -11,14 +11,14 @@ const styles = StyleSheet.create({
     backgroundColor: colors.gray,
   },
   title: {
-    ...FONT_STYLES.fontWeightSemiBold,
-    ...SHADOW_STYLE.textShadow,
+    marginTop: 10,
+    ...FONT_STYLES.fontWeightExtraBold,
     fontSize: 18,
     textAlign: 'center',
     color: colors.text,
   },
   image: {
-    marginTop: 20,
+    marginTop: 10,
     width: width - screenPadding * 2,
     height: 250,
     resizeMode: 'cover',
@@ -28,7 +28,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 10,
     marginTop: 17,
-    maxHeight: '50%',
+    maxHeight: '40%',
+    backgroundColor: colors.white,
   },
   description: {
     color: colors.text,
@@ -36,9 +37,7 @@ const styles = StyleSheet.create({
     ...FONT_STYLES.fontWeightRegular,
   },
   infoWrapper: {
-    position: 'absolute',
     left: screenPadding,
-    bottom: 8,
   },
   secondaryText: {
     color: colors.textSecondary,

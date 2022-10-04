@@ -1,4 +1,9 @@
 import React, {FC} from 'react';
+import {useRoute} from '~/hooks/hooks';
+import {RootNavigationParamList} from '~/common/types/types';
+import {RootScreenName} from '~/common/enums/navigation';
+import {RouteProp} from '@react-navigation/native';
+import {useAppSelector} from '~/hooks/hooks';
 import {
   Text,
   Image,
@@ -7,31 +12,33 @@ import {
   View,
 } from '~/components/components';
 import {styles} from './styles';
-import {images} from '~/assets/assets';
+import {placeDefaultImage} from '~/helpers/helpers';
+import {selectArticleById} from '~/store/selectors';
 
 const ArticleDetails: FC = () => {
+  const {
+    params: {id},
+  } =
+    useRoute<
+      RouteProp<RootNavigationParamList, RootScreenName.ARTICLE_DETAILS>
+    >();
+  const {title, description, publishedAt, urlToImage, author} = useAppSelector(
+    state => selectArticleById(state, id),
+  );
+
   return (
     <ScreenWrapper style={styles.wrapper}>
-      <Text style={styles.title} numberOfLines={2}>
-        Cryptoverse
-      </Text>
-      <Image source={images.article} style={styles.image} />
-      <ScrollView style={styles.descriptionWrapper}>
-        <Text style={styles.description}>
-          Sept 27 (Reuters) - Spare a thought for the beleaguered bitcoin miner.
-          In late 2021, miners were the toast of the town with a surefire path
-          to profit: hook powerful computers up to cheap power, crac…Sept 27
-          (Reuters) - Spare a thought for the beleaguered bitcoin miner. In late
-          2021, miners were the toast of the town with a surefire path to
-          profit: hook powerful computers up to cheap power, crac…
-        </Text>
-      </ScrollView>
       <View style={styles.infoWrapper}>
-        <Text style={styles.secondaryText}>
-          PUBLISHED SUN, OCT 2 2022 11:32
-        </Text>
-        <Text style={styles.secondaryText}>John Lue</Text>
+        <Text style={styles.secondaryText}>Published {publishedAt}</Text>
+        <Text style={styles.secondaryText}>{author}</Text>
       </View>
+      <Image source={placeDefaultImage(urlToImage)} style={styles.image} />
+      <Text style={styles.title} numberOfLines={3}>
+        {title}
+      </Text>
+      <ScrollView style={styles.descriptionWrapper}>
+        <Text style={styles.description}>{description}</Text>
+      </ScrollView>
     </ScreenWrapper>
   );
 };

@@ -6,5 +6,6 @@ export {
   Image,
   TouchableOpacity,
   ScrollView,
+  FlatList,
 } from 'react-native';
 export {ScreenWrapper} from './screen-wrapper/screen-wrapper';
