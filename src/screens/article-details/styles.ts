@@ -24,6 +24,9 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   descriptionWrapper: {
+    borderWidth: 1,
+    borderRadius: 5,
+    padding: 10,
     marginTop: 17,
     maxHeight: '50%',
   },

@@ -15,11 +15,11 @@ const Navigation: FC = () => {
         screenOptions={{
           headerShown: false,
         }}>
+        <NativeStack.Screen component={Home} name={RootScreenName.HOME} />
         <NativeStack.Screen
           component={ArticleDetails}
           name={RootScreenName.ARTICLE_DETAILS}
         />
-        <NativeStack.Screen component={Home} name={RootScreenName.HOME} />
       </NativeStack.Navigator>
     </StoreProvider>
   );

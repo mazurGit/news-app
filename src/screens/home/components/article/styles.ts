@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   title: {
     ...FONT_STYLES.fontWeightSemiBold,
     color: colors.text,
-    fontSize: 14,
+    fontSize: 16,
     textAlign: 'center',
   },
   divider: {
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   description: {
     color: colors.text,
     width: '70%',
-    fontSize: 11,
+    fontSize: 12,
     ...FONT_STYLES.fontWeightMedium,
   },
   image: {
