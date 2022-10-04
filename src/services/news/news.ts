@@ -1,12 +1,6 @@
 import {Http} from '../http/http';
 import {HttpUrlPath} from '~/common/enums/enums';
-import {NewsQuery, NewsDto} from '~/common/types/types';
-
-type ResponseDto = {
-  status: string;
-  totalResults: number;
-  articles: NewsDto[];
-};
+import {NewsQuery, NewsDto, ResponseDto} from '~/common/types/types';
 
 class News {
   private http: Http = new Http();

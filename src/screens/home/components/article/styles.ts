@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
     ...FONT_STYLES.fontWeightSemiBold,
     color: colors.text,
     fontSize: 16,
-    textAlign: 'center',
   },
   divider: {
     backgroundColor: colors.divider,
@@ -39,7 +38,7 @@ const styles = StyleSheet.create({
   image: {
     width: 80,
     height: 80,
-    resizeMode: 'contain',
+    resizeMode: 'cover',
   },
   time: {
     marginTop: 5,

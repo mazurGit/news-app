@@ -11,11 +11,6 @@ const SHADOW_STYLE = {
     shadowRadius: 1,
     elevation: 7,
   },
-  textShadow: {
-    textShadowColor: 'rgba(0, 0, 0, 0.25)',
-    textShadowOffset: {width: 0, height: 2},
-    textShadowRadius: 5,
-  },
 };
 
 export {SHADOW_STYLE};

@@ -10,6 +10,7 @@ type NewsDto = {
   urlToImage: string;
   publishedAt: string;
   content: string;
+  id: string;
 };
 
 export type {NewsDto};

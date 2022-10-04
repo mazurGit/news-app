@@ -1,20 +1,24 @@
 import React, {FC} from 'react';
+import {StyleProp, ViewStyle} from 'react-native';
 import {useNavigation} from '~/hooks/hooks';
-import {RootNavigationProps} from '~/common/types/types';
+import {NewsDto, RootNavigationProps} from '~/common/types/types';
 import {RootScreenName} from '~/common/enums/navigation';
 import {Text, View, Image, TouchableOpacity} from '~/components/components';
-import {images} from '~/assets/assets';
 import {styles} from './styles';
-import {StyleProp, ViewStyle} from 'react-native';
+import {placeDefaultImage} from '~/helpers/helpers';
 
 type Props = {
   contentContainerStyle?: StyleProp<ViewStyle>;
+  articleData: NewsDto;
 };
 
-const Article: FC<Props> = ({contentContainerStyle}) => {
+const Article: FC<Props> = ({contentContainerStyle, articleData}) => {
+  const {title, description, urlToImage, id} = articleData;
   const navigation = useNavigation<RootNavigationProps>();
   const onPress = () => {
-    navigation.navigate(RootScreenName.ARTICLE_DETAILS);
+    navigation.navigate(RootScreenName.ARTICLE_DETAILS, {
+      id,
+    });
   };
 
   return (
@@ -22,16 +26,14 @@ const Article: FC<Props> = ({contentContainerStyle}) => {
       onPress={onPress}
       style={[styles.wrapper, contentContainerStyle]}>
       <Text style={styles.title} numberOfLines={2}>
-        Some Article Title
+        {title}
       </Text>
       <View style={styles.divider} />
       <View style={styles.contentWrapper}>
         <Text style={styles.description} numberOfLines={6}>
-          Sept 27 (Reuters) - Spare a thought for the beleaguered bitcoin miner.
-          In late 2021, miners were the toast of the town with a surefire path
-          to profit: hook powerful computers up to cheap power, crac…
+          {description}
         </Text>
-        <Image source={images.article} style={styles.image} />
+        <Image source={placeDefaultImage(urlToImage)} style={styles.image} />
       </View>
       <Text style={styles.time}>10 minutes ago</Text>
     </TouchableOpacity>
