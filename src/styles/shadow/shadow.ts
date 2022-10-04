@@ -9,7 +9,7 @@ const SHADOW_STYLE = {
     },
     shadowOpacity: 0.15,
     shadowRadius: 1,
-    elevation: 5,
+    elevation: 7,
   },
   textShadow: {
     textShadowColor: 'rgba(0, 0, 0, 0.25)',

@@ -1,4 +1,7 @@
 import React, {FC} from 'react';
+import {useNavigation} from '~/hooks/hooks';
+import {RootNavigationProps} from '~/common/types/types';
+import {RootScreenName} from '~/common/enums/navigation';
 import {Text, View, Image, TouchableOpacity} from '~/components/components';
 import {images} from '~/assets/assets';
 import {styles} from './styles';
@@ -9,8 +12,15 @@ type Props = {
 };
 
 const Article: FC<Props> = ({contentContainerStyle}) => {
+  const navigation = useNavigation<RootNavigationProps>();
+  const onPress = () => {
+    navigation.navigate(RootScreenName.ARTICLE_DETAILS);
+  };
+
   return (
-    <TouchableOpacity style={[styles.wrapper, contentContainerStyle]}>
+    <TouchableOpacity
+      onPress={onPress}
+      style={[styles.wrapper, contentContainerStyle]}>
       <Text style={styles.title} numberOfLines={2}>
         Some Article Title
       </Text>
