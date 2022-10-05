@@ -29,8 +29,12 @@ const ArticleDetails: FC = () => {
   return (
     <ScreenWrapper style={styles.wrapper}>
       <View style={styles.infoWrapper}>
-        <Text style={styles.secondaryText}>Published {publishedAt}</Text>
-        <Text style={styles.secondaryText}>{author}</Text>
+        <Text style={styles.secondaryText} numberOfLines={1}>
+          Published: {publishedAt}
+        </Text>
+        <Text style={styles.secondaryText} numberOfLines={1}>
+          Author: {author}
+        </Text>
       </View>
       <Image source={placeDefaultImage(urlToImage)} style={styles.image} />
       <Text style={styles.title} numberOfLines={3}>

@@ -1,5 +1,5 @@
 import {StyleSheet, Dimensions} from 'react-native';
-import {FONT_STYLES, SHADOW_STYLE} from '~/styles/styles';
+import {FONT_STYLES} from '~/styles/styles';
 import {colors} from '~/common/constants/colors';
 
 const {width} = Dimensions.get('screen');
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     width: width - screenPadding * 2,
     height: 250,
-    resizeMode: 'cover',
+    resizeMode: 'contain',
   },
   descriptionWrapper: {
     borderWidth: 1,
