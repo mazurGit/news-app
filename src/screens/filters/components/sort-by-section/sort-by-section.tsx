@@ -1,8 +1,11 @@
 import React, {FC} from 'react';
 import {StyleProp, ViewStyle} from 'react-native';
+import {useAppDispatch, useAppSelector} from '~/hooks/hooks';
+import {filtersActions} from '~/store/actions';
+import {selectFilters} from '~/store/selectors';
 import {useMemo} from '~/hooks/hooks';
 import {RadioButton, View} from '~/components/components';
-import {FilterSectionTitle} from '~/common/enums/enums';
+import {FilterSectionTitle, SortBy} from '~/common/enums/enums';
 import {SectionTitle} from '../components';
 import {sortBySelectorData} from '~/common/constants/constants';
 import {styles} from './styles';
@@ -12,18 +15,25 @@ type Props = {
 };
 
 const SortBySection: FC<Props> = ({contentContainerStyle}) => {
+  const dispatch = useAppDispatch();
+  const {sortBy} = useAppSelector(selectFilters);
+  const onPress = (filterName: SortBy) => {
+    dispatch(filtersActions.updateFilter({sortBy: filterName}));
+  };
   const renderItems = useMemo(() => {
-    return sortBySelectorData.map(item => {
+    return sortBySelectorData.map(({name, title}) => {
+      const isSelected = sortBy === name;
       return (
         <RadioButton
-          label={item.title}
-          key={item.name}
-          isSelected={false}
+          label={title}
+          key={name}
+          isSelected={isSelected}
           style={styles.radioBtnContainer}
+          onPress={() => onPress(name)}
         />
       );
     });
-  }, []);
+  }, [sortBy]);
 
   return (
     <View style={contentContainerStyle}>

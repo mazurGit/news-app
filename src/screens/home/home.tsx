@@ -2,22 +2,36 @@ import React, {FC, useCallback} from 'react';
 import {ScreenWrapper, FlatList, Spinner} from '~/components/components';
 import {Article} from './components/components';
 import {useEffect, useAppDispatch, useAppSelector} from '~/hooks/hooks';
-import {newsApi} from '~/store/actions';
-import {selectArticles} from '~/store/selectors';
+import {newsActions} from '~/store/actions';
+import {selectArticles, selectFilters} from '~/store/selectors';
 import {DtoStatus} from '~/common/enums/enums';
-import {NewsDto} from '~/common/types/types';
+import {NewsDto, NewsQuery, RootState} from '~/common/types/types';
+import {removeObjectFalsyFields} from '~/helpers/helpers';
 
 const Home: FC = () => {
   const dispatch = useAppDispatch();
   const articles = useAppSelector(selectArticles);
   const page = useAppSelector(state => state.newsReducer.page);
   const dataStatus = useAppSelector(state => state.newsReducer.status);
+  const filters = useAppSelector(selectFilters);
   const isLoading = dataStatus === DtoStatus.PENDING;
   useEffect(() => {
-    dispatch(newsApi.getPopularNews());
+    dispatch(
+      newsActions.getPopularNews(
+        removeObjectFalsyFields<RootState['filtersReducer'], NewsQuery>(
+          filters,
+        ),
+      ),
+    );
   }, []);
   const onEndReached = () => {
-    dispatch(newsApi.getPopularNews());
+    dispatch(
+      newsActions.getPopularNews(
+        removeObjectFalsyFields<RootState['filtersReducer'], NewsQuery>(
+          filters,
+        ),
+      ),
+    );
   };
 
   const renderItem = useCallback(

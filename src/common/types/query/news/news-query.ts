@@ -1,10 +1,13 @@
-import {Category, Countries} from '~/common/enums/enums';
+import {Languages, SortBy} from '~/common/enums/enums';
 
 type NewsQuery = {
-  country?: Countries;
-  category?: Category;
+  language?: Languages;
+  from?: Date;
+  to?: Date;
+  sortBy?: SortBy;
   pageSize?: number;
   page?: number;
+  q?: string;
 };
 
 export type {NewsQuery};

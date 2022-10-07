@@ -6,7 +6,7 @@ class Http {
   private apiKey: string = '638b98c539d144359b7824876ae99c4f';
 
   private getUrl(url: string, params?: Record<string, unknown>): string {
-    return `${url}${params ? `${getQueryString(params)}` : ''}`;
+    return `${url}${params ? `?${getQueryString(params)}` : ''}`;
   }
 
   private getHeaders() {
@@ -24,6 +24,7 @@ class Http {
 
     const headers = this.getHeaders();
     const completeUrl = `${this.getUrl(url, params)}`;
+    console.log(completeUrl);
     const response = await fetch(completeUrl, {
       headers: headers,
       method,

@@ -3,7 +3,7 @@ import {NativeStackNavigationOptions} from '@react-navigation/native-stack';
 import {colors} from '~/common/constants/colors';
 import {RootScreenName} from '~/common/enums/navigation';
 import {RootNavigationParamList} from '~/common/types/types';
-import {FiltersHeader} from '~/components/components';
+import {FiltersHeader, SaveHeader} from '~/components/components';
 
 type Props = {
   route: RouteProp<RootNavigationParamList>;
@@ -13,6 +13,7 @@ const getScreenOptions = ({
   route,
 }: Props): Partial<NativeStackNavigationOptions> => {
   return {
+    headerRight: route.name === RootScreenName.FILTERS ? SaveHeader : undefined,
     presentation: route.name === RootScreenName.FILTERS ? 'modal' : 'card',
     headerTitleAlign: 'center',
     headerLeft: route.name === RootScreenName.HOME ? FiltersHeader : undefined,
@@ -23,6 +24,7 @@ const getScreenOptions = ({
     headerSearchBarOptions:
       route.name === RootScreenName.HOME
         ? {
+            onClose: () => console.log('canceld'),
             onChangeText: ({nativeEvent: {text}}) => console.log(text),
             headerIconColor: colors.black,
           }
