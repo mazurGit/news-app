@@ -6,6 +6,7 @@ import {store} from '~/store/store';
 import {RootNavigationParamList} from '~/common/types/types';
 import {RootScreenName} from '~/common/enums/navigation';
 import {Home, ArticleDetails, Filters} from '~/screens/screens';
+import {getScreenOptions} from './get-screen-options';
 
 appService.init();
 const NativeStack = createNativeStackNavigator<RootNavigationParamList>();
@@ -13,15 +14,21 @@ const NativeStack = createNativeStackNavigator<RootNavigationParamList>();
 const Navigation: FC = () => {
   return (
     <StoreProvider store={store}>
-      <NativeStack.Navigator
-        screenOptions={{
-          headerShown: false,
-        }}>
-        <NativeStack.Screen component={Filters} name={'Filters'} />
-        <NativeStack.Screen component={Home} name={RootScreenName.HOME} />
+      <NativeStack.Navigator>
+        <NativeStack.Screen
+          component={Home}
+          name={RootScreenName.HOME}
+          options={getScreenOptions}
+        />
         <NativeStack.Screen
           component={ArticleDetails}
           name={RootScreenName.ARTICLE_DETAILS}
+          options={getScreenOptions}
+        />
+        <NativeStack.Screen
+          component={Filters}
+          name={RootScreenName.FILTERS}
+          options={getScreenOptions}
         />
       </NativeStack.Navigator>
     </StoreProvider>

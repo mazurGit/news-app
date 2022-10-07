@@ -1,5 +1,5 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {ActionType} from './common ';
+import {ActionType} from './common';
 import {AsyncThunkConfig, ResponseDto, NewsQuery} from '~/common/types/types';
 import uuid from 'react-native-uuid';
 

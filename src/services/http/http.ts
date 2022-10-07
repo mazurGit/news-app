@@ -3,13 +3,10 @@ import {HttpOptions} from '~/common/types/types';
 import {HttpContentType, HttpMethod, HttpHeaders} from '~/common/enums/enums';
 
 class Http {
-  private apiPrefix: string = 'https://newsapi.org/v2/';
   private apiKey: string = '638b98c539d144359b7824876ae99c4f';
 
   private getUrl(url: string, params?: Record<string, unknown>): string {
-    return `${this.apiPrefix}${url}${
-      params ? `${getQueryString(params)}` : ''
-    }`;
+    return `${url}${params ? `${getQueryString(params)}` : ''}`;
   }
 
   private getHeaders() {

@@ -12,7 +12,7 @@ type InitialState = {
 
 const initialState: InitialState = {
   totalResults: 0,
-  page: 0,
+  page: 1,
   articles: [],
   status: DtoStatus.IDLE,
 };
