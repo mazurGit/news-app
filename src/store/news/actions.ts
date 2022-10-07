@@ -9,7 +9,9 @@ const getPopularNews = createAsyncThunk<
   AsyncThunkConfig
 >(ActionType.NEWS_FETCH, async (requestParams, {extra}) => {
   const {news} = extra;
-  const {status, articles, totalResults} = await news.getNews(requestParams);
+  const {status, articles, totalResults} = requestParams.q
+    ? await news.getNewsWithSearchValue(requestParams)
+    : await news.getNews(requestParams);
   const modifiedResponse = {
     status,
     totalResults,

@@ -1,24 +1,38 @@
 import React, {FC} from 'react';
 import dayjs from 'dayjs';
-import {useState} from '~/hooks/hooks';
+import {
+  useState,
+  useAppDispatch,
+  useAppSelector,
+  useEffect,
+} from '~/hooks/hooks';
 import {DatePicker, Text, Button, View} from '~/components/components';
 import {DatePickerSelector} from '~/common/enums/enums';
 import {styles} from './styles';
 import {SectionTitle} from '../components';
+import {selectFilters} from '~/store/selectors';
+import {filtersActions} from '~/store/actions';
 
 type Props = {
   type: DatePickerSelector;
 };
 
 const DatePickerButton: FC<Props> = ({type}) => {
-  const [date, setDate] = useState(new Date());
+  const isBtnFrom = type === DatePickerSelector.FROM;
+  const dispatch = useAppDispatch();
+  const {from, to} = useAppSelector(selectFilters);
   const [open, setOpen] = useState(false);
-
+  const date = dayjs(isBtnFrom ? from : to).format('ll');
   const onButtonPress = () => {
     setOpen(prevState => !prevState);
   };
-
-  const isBtnFrom = type === DatePickerSelector.FROM;
+  const onConfirm = (chosenDate: Date) => {
+    if (isBtnFrom) {
+      dispatch(filtersActions.updateFilter({from: chosenDate}));
+    } else {
+      dispatch(filtersActions.updateFilter({to: chosenDate}));
+    }
+  };
 
   return (
     <View>
@@ -26,16 +40,16 @@ const DatePickerButton: FC<Props> = ({type}) => {
         title={isBtnFrom ? DatePickerSelector.FROM : DatePickerSelector.TO}
       />
       <Button onPress={onButtonPress} style={styles.dateContainer}>
-        <Text style={styles.dateText}>{dayjs(date).format('ll')}</Text>
+        <Text style={styles.dateText}>{date}</Text>
       </Button>
       <DatePicker
         modal
         mode="date"
         open={open}
-        date={date}
+        date={isBtnFrom ? from : to}
         onConfirm={chosenDate => {
           setOpen(false);
-          setDate(chosenDate);
+          onConfirm(chosenDate);
         }}
         onCancel={() => {
           setOpen(false);

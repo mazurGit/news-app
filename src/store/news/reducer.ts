@@ -1,14 +1,7 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {ResponseDto} from '~/common/types/types';
 import {getPopularNews} from './actions';
 import {DtoStatus} from '~/common/enums/enums';
-
-type InitialState = {
-  totalResults: ResponseDto['totalResults'];
-  articles: ResponseDto['articles'];
-  status: DtoStatus;
-  page: number;
-};
+import {InitialState} from './common';
 
 const initialState: InitialState = {
   totalResults: 0,
@@ -27,7 +20,7 @@ const reducer = createReducer(initialState, builder => {
     })
     .addCase(getPopularNews.fulfilled, (state, action) => {
       state.status = DtoStatus.FULFILLED;
-      state.articles = [...state.articles, ...action.payload.articles];
+      state.articles = action.payload.articles;
       state.page = state.page + 1;
     });
 });

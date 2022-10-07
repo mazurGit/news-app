@@ -6,6 +6,7 @@ const store = configureStore({
   reducer: rootReducer,
   middleware: getDefaultMiddleware => {
     const defaultMiddleware = getDefaultMiddleware({
+      serializableCheck: false,
       thunk: {
         extraArgument,
       },
