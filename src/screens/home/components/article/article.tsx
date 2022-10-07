@@ -6,6 +6,7 @@ import {RootScreenName} from '~/common/enums/navigation';
 import {Text, View, Image, TouchableOpacity} from '~/components/components';
 import {styles} from './styles';
 import {placeDefaultImage} from '~/helpers/helpers';
+import dayjs from 'dayjs';
 
 type Props = {
   contentContainerStyle?: StyleProp<ViewStyle>;
@@ -13,8 +14,11 @@ type Props = {
 };
 
 const Article: FC<Props> = ({contentContainerStyle, articleData}) => {
-  const {title, description, urlToImage, id} = articleData;
+  const {title, description, urlToImage, id, publishedAt} = articleData;
   const navigation = useNavigation<RootNavigationProps>();
+  const timeAfterPublishing = dayjs
+    .duration(dayjs(publishedAt).diff(dayjs()))
+    .humanize(true);
   const onPress = () => {
     navigation.navigate(RootScreenName.ARTICLE_DETAILS, {
       id,
@@ -35,7 +39,7 @@ const Article: FC<Props> = ({contentContainerStyle, articleData}) => {
         </Text>
         <Image source={placeDefaultImage(urlToImage)} style={styles.image} />
       </View>
-      <Text style={styles.time}>10 minutes ago</Text>
+      <Text style={styles.time}>{timeAfterPublishing}</Text>
     </TouchableOpacity>
   );
 };

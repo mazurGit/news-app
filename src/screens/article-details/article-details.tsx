@@ -14,6 +14,7 @@ import {
 import {styles} from './styles';
 import {placeDefaultImage} from '~/helpers/helpers';
 import {selectArticleById} from '~/store/selectors';
+import dayjs from 'dayjs';
 
 const ArticleDetails: FC = () => {
   const {
@@ -25,12 +26,13 @@ const ArticleDetails: FC = () => {
   const {title, description, publishedAt, urlToImage, author} = useAppSelector(
     state => selectArticleById(state, id),
   );
+  const publishedAtFormat = dayjs(publishedAt).format('llll');
 
   return (
     <ScreenWrapper style={styles.wrapper}>
       <View style={styles.infoWrapper}>
         <Text style={styles.secondaryText} numberOfLines={1}>
-          Published: {publishedAt}
+          Published: {publishedAtFormat}
         </Text>
         <Text style={styles.secondaryText} numberOfLines={1}>
           Author: {author}

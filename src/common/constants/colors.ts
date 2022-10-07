@@ -6,7 +6,9 @@ const colors = {
   red: '#ff0000',
   text: '#000000',
   textSecondary: '#6A6C6D',
+  btnBackground: '#DFDFDF',
   divider: '#DFDFDF',
+  black: '#000000',
 };
 
 export {colors};
