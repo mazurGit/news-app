@@ -1,7 +1,11 @@
-import {Http} from './http/http';
-import {News} from './news/news';
+import {HttpServices} from './http/http';
+import {NewsServices} from './news/news';
 import {AppService} from './app/app';
-const http = new Http();
-const news = new News();
+import {NotificationService} from './notification/notification';
+
+const http = new HttpServices();
+const news = new NewsServices();
 const appService = new AppService();
-export {http, news, appService};
+const notification = new NotificationService();
+
+export {http, news, appService, notification};

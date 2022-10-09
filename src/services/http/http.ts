@@ -2,7 +2,7 @@ import {getQueryString} from '~/helpers/helpers';
 import {HttpOptions} from '~/common/types/types';
 import {HttpContentType, HttpMethod, HttpHeaders} from '~/common/enums/enums';
 
-class Http {
+class HttpServices {
   private apiKey: string = '638b98c539d144359b7824876ae99c4f';
 
   private getUrl(url: string, params?: Record<string, unknown>): string {
@@ -38,4 +38,4 @@ class Http {
   }
 }
 
-export {Http};
+export {HttpServices};

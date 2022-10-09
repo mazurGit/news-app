@@ -6,8 +6,8 @@ import {dateRange} from '~/common/constants/date-range';
 
 const initialState: InitialState = {
   sortBy: SortBy.POPULARITY,
-  from: dateRange.min,
-  to: dateRange.max,
+  from: dateRange.MIN,
+  to: dateRange.MAX,
   language: null,
   q: null,
 };
