@@ -14,9 +14,8 @@ const errorHandler: Middleware =
       } else {
         notification.error(errors.COMMON, `Error : ${message}`);
       }
-
-      return next(action);
     }
+    return next(action);
   };
 
 export {errorHandler};

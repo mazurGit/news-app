@@ -49,9 +49,7 @@ const Home: FC = () => {
   useEffect(() => {
     updateNews();
   }, []);
-  const onRefresh = useCallback(() => {
-    updateNews();
-  }, [updateNews]);
+
   const renderItem = useCallback(
     ({item}: {item: NewsDto}) => {
       return (
@@ -64,6 +62,7 @@ const Home: FC = () => {
     [articles],
   );
   const keyExtractor = useCallback((item: NewsDto) => item.id, [articles]);
+
   return (
     <ScreenWrapper>
       <FlatList
@@ -89,7 +88,7 @@ const Home: FC = () => {
         renderItem={renderItem}
         scrollEnabled={isLoading ? false : true}
         refreshControl={
-          <RefreshControl refreshing={isLoading} onRefresh={onRefresh} />
+          <RefreshControl refreshing={isLoading} onRefresh={updateNews} />
         }
       />
     </ScreenWrapper>

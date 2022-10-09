@@ -3,7 +3,7 @@ import {HttpOptions} from '~/common/types/types';
 import {HttpContentType, HttpMethod, HttpHeaders} from '~/common/enums/enums';
 
 class HttpServices {
-  private apiKey: string = '79551646fe8d498ab4c3c40e8e404dfd';
+  private apiKey: string = '638b98c539d144359b7824876ae99c4f';
 
   private getUrl(url: string, params?: Record<string, unknown>): string {
     return `${url}${params ? `?${getQueryString(params)}` : ''}`;
@@ -24,7 +24,7 @@ class HttpServices {
 
     const headers = this.getHeaders();
     const completeUrl = `${this.getUrl(url, params)}`;
-    console.log(completeUrl);
+    console.log(completeUrl)
     const response = await fetch(completeUrl, {
       headers: headers,
       method,

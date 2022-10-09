@@ -18,7 +18,10 @@ const getNews = createAsyncThunk<
         page,
         searchIn: 'title',
       })
-    : await news.getNews(requestParams);
+    : await news.getNews({
+        ...requestParams,
+        page,
+      });
   const modifiedResponse = {
     status,
     totalResults,
