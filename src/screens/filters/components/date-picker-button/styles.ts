@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignSelf: 'baseline',
     marginTop: 5,
-    paddingHorizontal: 15,
+    paddingHorizontal: 20,
     borderRadius: 8,
     backgroundColor: colors.btnBackground,
     height: 35,

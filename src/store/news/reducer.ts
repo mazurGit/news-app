@@ -1,5 +1,5 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {getPopularNews} from './actions';
+import {getNews, resetNews} from './actions';
 import {DtoStatus} from '~/common/enums/enums';
 import {InitialState} from './common';
 
@@ -7,21 +7,24 @@ const initialState: InitialState = {
   totalResults: 0,
   page: 1,
   articles: [],
-  status: DtoStatus.IDLE,
+  dataStatus: DtoStatus.IDLE,
 };
 
 const reducer = createReducer(initialState, builder => {
   builder
-    .addCase(getPopularNews.pending, state => {
-      state.status = DtoStatus.PENDING;
+    .addCase(getNews.pending, state => {
+      state.dataStatus = DtoStatus.PENDING;
     })
-    .addCase(getPopularNews.rejected, state => {
-      state.status = DtoStatus.REJECTED;
+    .addCase(getNews.rejected, state => {
+      state.dataStatus = DtoStatus.REJECTED;
     })
-    .addCase(getPopularNews.fulfilled, (state, action) => {
-      state.status = DtoStatus.FULFILLED;
-      state.articles = action.payload.articles;
+    .addCase(getNews.fulfilled, (state, action) => {
+      state.dataStatus = DtoStatus.FULFILLED;
+      state.articles = [...state.articles, ...action.payload.articles];
       state.page = state.page + 1;
+    })
+    .addCase(resetNews, () => {
+      return {...initialState};
     });
 });
 

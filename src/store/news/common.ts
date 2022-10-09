@@ -3,12 +3,13 @@ import {DtoStatus} from '~/common/enums/enums';
 
 enum ActionType {
   NEWS_FETCH = 'news/fetch',
+  NEW_RESET = 'news/rest',
 }
 
 type InitialState = {
   totalResults: ResponseDto['totalResults'];
   articles: ResponseDto['articles'];
-  status: DtoStatus;
+  dataStatus: DtoStatus;
   page: number;
 };
 

@@ -11,8 +11,9 @@ const SaveHeader = () => {
   const dispatch = useAppDispatch();
   const filters = useAppSelector(selectFilters);
   const onPress = () => {
+    dispatch(newsActions.resetNews());
     dispatch(
-      newsActions.getPopularNews(
+      newsActions.getNews(
         removeObjectFalsyFields<RootState['filtersReducer'], NewsQuery>(
           filters,
         ),
