@@ -1,6 +1,9 @@
+import dayjs from 'dayjs';
+const todaysDate = dayjs();
+
 const dateRange = {
-  min: new Date('2022-09-15'),
-  max: new Date(),
+  min: todaysDate.subtract(30, 'days').toDate(),
+  max: todaysDate.toDate(),
 };
 
 export {dateRange};

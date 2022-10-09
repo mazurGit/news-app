@@ -8,6 +8,7 @@ type NewsQuery = {
   pageSize?: number;
   page?: number;
   q?: string;
+  searchIn?: 'title' | 'description' | 'content';
 };
 
 export type {NewsQuery};

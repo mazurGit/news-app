@@ -11,4 +11,14 @@ const selectArticleById = createSelector(
     return articleData as NewsDto;
   },
 );
-export {selectArticles, selectArticleById};
+
+const selectDataStatus = (state: RootState) => state.newsReducer.dataStatus;
+
+const selectTotalResults = (state: RootState) => state.newsReducer.totalResults;
+
+export {
+  selectArticles,
+  selectArticleById,
+  selectDataStatus,
+  selectTotalResults,
+};

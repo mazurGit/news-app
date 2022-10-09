@@ -13,9 +13,6 @@ const styles = StyleSheet.create({
   dropDownContainerStyle: {
     backgroundColor: colors.btnBackground,
   },
-  searchTextInputStyle: {
-    backgroundColor: colors.white,
-  },
   placeholderStyle: {
     borderWidth: 0,
     paddingHorizontal: 15,

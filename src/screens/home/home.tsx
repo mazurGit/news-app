@@ -1,43 +1,64 @@
-import React, {FC, useCallback} from 'react';
-import {ScreenWrapper, FlatList, Spinner} from '~/components/components';
+import React, {FC} from 'react';
+import {
+  ScreenWrapper,
+  FlatList,
+  Text,
+  RefreshControl,
+} from '~/components/components';
 import {Article} from './components/components';
-import {useEffect, useAppDispatch, useAppSelector} from '~/hooks/hooks';
+import {
+  useEffect,
+  useAppDispatch,
+  useAppSelector,
+  useCallback,
+  useRef,
+} from '~/hooks/hooks';
 import {newsActions} from '~/store/actions';
-import {selectArticles, selectFilters} from '~/store/selectors';
+import {
+  selectArticles,
+  selectFilters,
+  selectDataStatus,
+  selectTotalResults,
+} from '~/store/selectors';
 import {DtoStatus} from '~/common/enums/enums';
 import {NewsDto, NewsQuery, RootState} from '~/common/types/types';
 import {removeObjectFalsyFields} from '~/helpers/helpers';
+import {styles} from './styles';
 
 const Home: FC = () => {
   const dispatch = useAppDispatch();
   const articles = useAppSelector(selectArticles);
-  const page = useAppSelector(state => state.newsReducer.page);
-  const dataStatus = useAppSelector(state => state.newsReducer.status);
+  const dataStatus = useAppSelector(selectDataStatus);
   const filters = useAppSelector(selectFilters);
+  const totalResults = useAppSelector(selectTotalResults);
   const isLoading = dataStatus === DtoStatus.PENDING;
+  const canEndReachBeTriggered = useRef(false);
+  const scrollLoadNews = useCallback(() => {
+    dispatch(
+      newsActions.getNews(
+        removeObjectFalsyFields<RootState['filtersReducer'], NewsQuery>(
+          filters,
+        ),
+      ),
+    );
+  }, [filters]);
+  const updateNews = useCallback(() => {
+    dispatch(newsActions.resetNews());
+    scrollLoadNews();
+  }, [filters]);
   useEffect(() => {
-    dispatch(
-      newsActions.getPopularNews(
-        removeObjectFalsyFields<RootState['filtersReducer'], NewsQuery>(
-          filters,
-        ),
-      ),
-    );
+    updateNews();
   }, []);
-  const onEndReached = () => {
-    dispatch(
-      newsActions.getPopularNews(
-        removeObjectFalsyFields<RootState['filtersReducer'], NewsQuery>(
-          filters,
-        ),
-      ),
-    );
-  };
-
+  const onRefresh = useCallback(() => {
+    updateNews();
+  }, [updateNews]);
   const renderItem = useCallback(
     ({item}: {item: NewsDto}) => {
       return (
-        <Article articleData={item} contentContainerStyle={{marginTop: 10}} />
+        <Article
+          articleData={item}
+          contentContainerStyle={styles.itemContainer}
+        />
       );
     },
     [articles],
@@ -46,12 +67,30 @@ const Home: FC = () => {
   return (
     <ScreenWrapper>
       <FlatList
-        ListFooterComponent={isLoading ? <Spinner /> : null}
+        ListEmptyComponent={
+          <Text style={styles.emptyList}>
+            There are no articles with requested parameters
+          </Text>
+        }
         onEndReachedThreshold={0.1}
-        onEndReached={onEndReached}
+        onEndReached={() => {
+          if (
+            canEndReachBeTriggered.current &&
+            totalResults < articles.length
+          ) {
+            scrollLoadNews();
+          }
+        }}
+        onScrollBeginDrag={() => {
+          canEndReachBeTriggered.current = true;
+        }}
         data={articles}
         keyExtractor={keyExtractor}
         renderItem={renderItem}
+        scrollEnabled={isLoading ? false : true}
+        refreshControl={
+          <RefreshControl refreshing={isLoading} onRefresh={onRefresh} />
+        }
       />
     </ScreenWrapper>
   );

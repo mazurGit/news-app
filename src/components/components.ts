@@ -9,6 +9,7 @@ export {
   FlatList,
   RefreshControl,
   Pressable as Button,
+  Modal,
 } from 'react-native';
 export {default as DatePicker} from 'react-native-date-picker';
 export {ScreenWrapper} from './screen-wrapper/screen-wrapper';

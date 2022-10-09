@@ -14,22 +14,13 @@ const NativeStack = createNativeStackNavigator<RootNavigationParamList>();
 const Navigation: FC = () => {
   return (
     <StoreProvider store={store}>
-      <NativeStack.Navigator>
-        <NativeStack.Screen
-          component={Home}
-          name={RootScreenName.HOME}
-          options={getScreenOptions}
-        />
+      <NativeStack.Navigator screenOptions={getScreenOptions}>
+        <NativeStack.Screen component={Home} name={RootScreenName.HOME} />
         <NativeStack.Screen
           component={ArticleDetails}
           name={RootScreenName.ARTICLE_DETAILS}
-          options={getScreenOptions}
         />
-        <NativeStack.Screen
-          component={Filters}
-          name={RootScreenName.FILTERS}
-          options={getScreenOptions}
-        />
+        <NativeStack.Screen component={Filters} name={RootScreenName.FILTERS} />
       </NativeStack.Navigator>
     </StoreProvider>
   );

@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 10,
     marginTop: 17,
-    maxHeight: '40%',
+    maxHeight: '35%',
     backgroundColor: colors.white,
   },
   description: {
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     ...FONT_STYLES.fontWeightRegular,
   },
   infoWrapper: {
-    left: screenPadding,
+    marginTop: 5,
   },
   secondaryText: {
     color: colors.textSecondary,

@@ -10,9 +10,9 @@ const styles = StyleSheet.create({
   line: {
     marginBottom: 18,
     height: 2,
-    width: '30%',
+    width: '25%',
     backgroundColor: colors.divider,
-  }
+  },
 });
 
 export {styles};

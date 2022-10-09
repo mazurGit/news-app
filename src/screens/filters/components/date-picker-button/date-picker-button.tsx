@@ -1,17 +1,13 @@
 import React, {FC} from 'react';
 import dayjs from 'dayjs';
-import {
-  useState,
-  useAppDispatch,
-  useAppSelector,
-  useEffect,
-} from '~/hooks/hooks';
+import {useState, useAppDispatch, useAppSelector} from '~/hooks/hooks';
 import {DatePicker, Text, Button, View} from '~/components/components';
 import {DatePickerSelector} from '~/common/enums/enums';
 import {styles} from './styles';
 import {SectionTitle} from '../components';
 import {selectFilters} from '~/store/selectors';
 import {filtersActions} from '~/store/actions';
+import {checkDate} from '~/helpers/helpers';
 
 type Props = {
   type: DatePickerSelector;
@@ -27,10 +23,11 @@ const DatePickerButton: FC<Props> = ({type}) => {
     setOpen(prevState => !prevState);
   };
   const onConfirm = (chosenDate: Date) => {
+    const newDate = checkDate(chosenDate);
     if (isBtnFrom) {
-      dispatch(filtersActions.updateFilter({from: chosenDate}));
+      dispatch(filtersActions.updateFilter({from: newDate}));
     } else {
-      dispatch(filtersActions.updateFilter({to: chosenDate}));
+      dispatch(filtersActions.updateFilter({to: newDate}));
     }
   };
 
