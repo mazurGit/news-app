@@ -1,11 +1,15 @@
-import {dateRange} from '~/common/constants/constants';
+import {dateRange, errors} from '~/common/constants/constants';
+import {notification} from '~/services/services';
 
 const checkDate = (chosenDate: Date) => {
-  return chosenDate < dateRange.min
-    ? dateRange.min
-    : chosenDate > dateRange.max
-    ? dateRange.max
-    : chosenDate;
+  if (chosenDate < dateRange.MIN) {
+    notification.error(errors.DATE_MIN);
+    return dateRange.MIN;
+  } else if (chosenDate > dateRange.MAX) {
+    notification.error(errors.DATE_MAX);
+    return dateRange.MAX;
+  }
+  return chosenDate;
 };
 
 export {checkDate};
